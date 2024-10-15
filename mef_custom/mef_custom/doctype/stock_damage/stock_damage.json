@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "hash",
+ "autoname": "format:{item_name}-{##}",
  "creation": "2024-06-12 20:38:11.342466",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -50,11 +50,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 20:41:31.933640",
+ "modified": "2024-10-15 12:57:59.557988",
  "modified_by": "Administrator",
  "module": "Mef Custom",
  "name": "Stock Damage",
- "naming_rule": "Random",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

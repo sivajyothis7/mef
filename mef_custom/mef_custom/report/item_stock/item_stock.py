@@ -93,22 +93,21 @@ def get_item_price_qty_data(filters):
     result = []
     if item_results:
         for item_dict in item_results:
-            data = {
-                "item_code": item_dict.item_code,
-                "item_name": item_dict.item_name,
-                "brand": item_dict.brand,
-                "warehouse": item_dict.warehouse,
-                "stock_available": item_dict.actual_qty or 0,
-                "selling_price_list": "",
-                "selling_rate": 0.0,
-            }
-
             price_list = item_dict["price_list_name"]
+            
+            # Only include items that have "Main Store Price"
             if selling_price_map.get(price_list):
-                data["selling_price_list"] = selling_price_map.get(price_list)["Selling Price List"] or ""
-                data["selling_rate"] = selling_price_map.get(price_list)["Selling Rate"] or 0
+                data = {
+                    "item_code": item_dict.item_code,
+                    "item_name": item_dict.item_name,
+                    "brand": item_dict.brand,
+                    "warehouse": item_dict.warehouse,
+                    "stock_available": item_dict.actual_qty or 0,
+                    "selling_price_list": selling_price_map.get(price_list)["Selling Price List"] or "",
+                    "selling_rate": selling_price_map.get(price_list)["Selling Rate"] or 0,
+                }
 
-            result.append(data)
+                result.append(data)
 
     return result
 
@@ -122,6 +121,7 @@ def get_price_map(price_list_names, selling=0, price_list="Main Store Price"):
     rate_key = "Selling Rate"
     price_list_key = "Selling Price List"
 
+    # Only fetch prices for "Main Store Price"
     filters = {"name": ("in", price_list_names), "price_list": price_list}
     filters["selling"] = 1
 

@@ -1,0 +1,51 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-10-21 14:49:27.415884",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-10-21 14:54:04.372568",
+ "modified_by": "Administrator",
+ "module": "Mef Custom",
+ "name": "Item Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \n    a.item_code AS \"Item:Link/Item:175\",\n    a.brand AS \"Brand:Link/Brand:120\",\n    a.custom_displayed_item AS \"Displayed or Not:Select:150\",\n    a.custom_main_store_price AS \"Main Store Price:Currency:150\",\n    b.warehouse AS \"Warehouse:Link/Warehouse:120\",\n    b.actual_qty AS \"Balance Qty:Float:140\"\nFROM \n    `tabItem` a \nLEFT JOIN \n    `tabBin` b ON a.item_code = b.item_code\nWHERE \n    a.docstatus < 2  -- To exclude deleted items\n",
+ "ref_doctype": "Item",
+ "report_name": "Item Report",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Item Manager"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "Desk User"
+  }
+ ]
+}

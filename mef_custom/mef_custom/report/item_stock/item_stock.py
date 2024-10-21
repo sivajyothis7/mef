@@ -1,49 +1,63 @@
+# Copyright (c) 2024, siva and contributors
+# For license information, please see license.txt
+
+
 import frappe
 from frappe import _
 
+
 def execute(filters=None):
-    columns, data = [], []
-    columns = get_columns()
-    data = get_data(filters)
-    return columns, data
+	columns, data = [], []
+	columns = get_columns()
+	data = get_data(filters, columns)
+	return columns, data
 
 
 def get_columns():
-    return [
-        {
-            "label": _("Item Code"),
-            "fieldname": "item_code",
-            "fieldtype": "Link",
-            "options": "Item",
-            "width": 120,
-        },
-        {"label": _("Item Name"), "fieldname": "item_name", "fieldtype": "Data", "width": 120},
-        {"label": _("Brand"), "fieldname": "brand", "fieldtype": "Data", "width": 100},
-        {
-            "label": _("Warehouse"),
-            "fieldname": "warehouse",
-            "fieldtype": "Link",
-            "options": "Warehouse",
-            "width": 120,
-        },
-        {
-            "label": _("Stock Available"),
-            "fieldname": "stock_available",
-            "fieldtype": "Float",
-            "width": 120,
-        },
-        {
-            "label": _("Selling Price List"),
-            "fieldname": "selling_price_list",
-            "fieldtype": "Link",
-            "options": "Price List",
-            "width": 120,
-        },
-        {"label": _("Selling Rate"), "fieldname": "selling_rate", "fieldtype": "Currency", "width": 120},
-    ]
+	return [
+		{
+			"label": _("Item Code"),
+			"fieldname": "item_code",
+			"fieldtype": "Link",
+			"options": "Item",
+			"width": 120,
+		},
+		{"label": _("Item Name"), "fieldname": "item_name", "fieldtype": "Data", "width": 120},
+		{"label": _("Brand"), "fieldname": "brand", "fieldtype": "Data", "width": 100},
+		{
+			"label": _("Warehouse"),
+			"fieldname": "warehouse",
+			"fieldtype": "Link",
+			"options": "Warehouse",
+			"width": 120,
+		},
+		{
+			"label": _("Stock Available"),
+			"fieldname": "stock_available",
+			"fieldtype": "Float",
+			"width": 120,
+		},
+		# {
+		# 	"label": _("Buying Price List"),
+		# 	"fieldname": "buying_price_list",
+		# 	"fieldtype": "Link",
+		# 	"options": "Price List",
+		# 	"width": 120,
+		# },
+		# {"label": _("Buying Rate"), "fieldname": "buying_rate", "fieldtype": "Currency", "width": 120},
+		{
+			"label": _("Selling Price List"),
+			"fieldname": "selling_price_list",
+			"fieldtype": "Link",
+			"options": "Price List",
+			"width": 120,
+		},
+		{"label": _("Selling Rate"), "fieldname": "selling_rate", "fieldtype": "Currency", "width": 120},
+	]
 
 
-def get_data(filters):
+def get_data(filters, columns):
+    item_price_qty_data = []
     item_price_qty_data = get_item_price_qty_data(filters)
     return item_price_qty_data
 
@@ -59,35 +73,64 @@ def get_item_price_qty_data(filters):
         .select(
             item_price.item_code,
             item_price.item_name,
+            item_price.name.as_("price_list_name"),
             item_price.brand.as_("brand"),
             bin.warehouse.as_("warehouse"),
             bin.actual_qty.as_("actual_qty"),
-            item_price.price_list.as_("price_list"),
-            item_price.price_list_rate.as_("selling_rate")
         )
-        .where(item_price.price_list == "Main Store Price")
-        .where(item_price.selling == 1)
     )
 
     if filters.get("item_code"):
         query = query.where(item_price.item_code == filters.get("item_code"))
 
     item_results = query.run(as_dict=True)
-    return item_results
+
+    price_list_names = list(set(item.price_list_name for item in item_results))
+
+    # Fetching selling prices only for Main Store Price
+    selling_price_map = get_price_map(price_list_names, selling=1, price_list="Main Store Price")
+
+    result = []
+    if item_results:
+        for item_dict in item_results:
+            price_list = item_dict["price_list_name"]
+            
+            # Only include items that have "Main Store Price"
+            if selling_price_map.get(price_list):
+                data = {
+                    "item_code": item_dict.item_code,
+                    "item_name": item_dict.item_name,
+                    "brand": item_dict.brand,
+                    "warehouse": item_dict.warehouse,
+                    "stock_available": item_dict.actual_qty or 0,
+                    "selling_price_list": selling_price_map.get(price_list)["Selling Price List"] or "",
+                    "selling_rate": selling_price_map.get(price_list)["Selling Rate"] or 0,
+                }
+
+                result.append(data)
+
+    return result
 
 
-@frappe.whitelist()
-def get_items_with_main_store_price():
-    # Get distinct items with "Main Store Price" set for selling
-    item_price_list = frappe.db.get_list(
-        "Item Price",
-        filters={"price_list": "Main Store Price", "selling": 1},
-        fields=["item_code"],
-        distinct=True
+def get_price_map(price_list_names, selling=0, price_list="Main Store Price"):
+    price_map = {}
+
+    if not price_list_names:
+        return price_map
+
+    rate_key = "Selling Rate"
+    price_list_key = "Selling Price List"
+
+    # Only fetch prices for "Main Store Price"
+    filters = {"name": ("in", price_list_names), "price_list": price_list}
+    filters["selling"] = 1
+
+    pricing_details = frappe.get_all(
+        "Item Price", fields=["name", "price_list", "price_list_rate"], filters=filters
     )
 
-    # Extract item codes from the result
-    item_codes = [item["item_code"] for item in item_price_list]
-    
-    # Return filtered items for the item_code filter in the JS report
-    return {"filters": [["Item", "name", "in", item_codes]]}
+    for d in pricing_details:
+        name = d["name"]
+        price_map[name] = {price_list_key: d["price_list"], rate_key: d["price_list_rate"]}
+
+    return price_map

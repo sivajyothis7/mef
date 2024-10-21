@@ -87,7 +87,6 @@ def get_item_price_qty_data(filters):
 
     price_list_names = list(set(item.price_list_name for item in item_results))
 
-    # Fetching selling prices only for Main Store Price
     selling_price_map = get_price_map(price_list_names, selling=1, price_list="Main Store Price")
 
     result = []
@@ -95,7 +94,6 @@ def get_item_price_qty_data(filters):
         for item_dict in item_results:
             price_list = item_dict["price_list_name"]
             
-            # Only include items that have "Main Store Price"
             if selling_price_map.get(price_list):
                 data = {
                     "item_code": item_dict.item_code,
@@ -121,7 +119,6 @@ def get_price_map(price_list_names, selling=0, price_list="Main Store Price"):
     rate_key = "Selling Rate"
     price_list_key = "Selling Price List"
 
-    # Only fetch prices for "Main Store Price"
     filters = {"name": ("in", price_list_names), "price_list": price_list}
     filters["selling"] = 1
 

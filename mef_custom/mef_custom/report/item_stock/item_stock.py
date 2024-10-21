@@ -57,83 +57,73 @@ def get_columns():
 
 
 def get_data(filters, columns):
-	item_price_qty_data = []
-	item_price_qty_data = get_item_price_qty_data(filters)
-	return item_price_qty_data
+    item_price_qty_data = []
+    item_price_qty_data = get_item_price_qty_data(filters)
+    return item_price_qty_data
 
 
 def get_item_price_qty_data(filters):
-	item_price = frappe.qb.DocType("Item Price")
-	bin = frappe.qb.DocType("Bin")
+    item_price = frappe.qb.DocType("Item Price")
+    bin = frappe.qb.DocType("Bin")
 
-	query = (
-		frappe.qb.from_(item_price)
-		.left_join(bin)
-		.on(item_price.item_code == bin.item_code)
-		.select(
-			item_price.item_code,
-			item_price.item_name,
-			item_price.name.as_("price_list_name"),
-			item_price.brand.as_("brand"),
-			bin.warehouse.as_("warehouse"),
-			bin.actual_qty.as_("actual_qty"),
-		)
-	)
+    query = (
+        frappe.qb.from_(item_price)
+        .left_join(bin)
+        .on(item_price.item_code == bin.item_code)
+        .select(
+            item_price.item_code,
+            item_price.item_name,
+            item_price.name.as_("price_list_name"),
+            item_price.brand.as_("brand"),
+            bin.warehouse.as_("warehouse"),
+            bin.actual_qty.as_("actual_qty"),
+        )
+    )
 
-	if filters.get("item_code"):
-		query = query.where(item_price.item_code == filters.get("item_code"))
+    if filters.get("item_code"):
+        query = query.where(item_price.item_code == filters.get("item_code"))
 
-	item_results = query.run(as_dict=True)
+    item_results = query.run(as_dict=True)
 
-	price_list_names = list(set(item.price_list_name for item in item_results))
+    price_list_names = list(set(item.price_list_name for item in item_results))
 
-	buying_price_map = get_price_map(price_list_names, buying=1)
-	selling_price_map = get_price_map(price_list_names, selling=1)
+    # Fetching selling prices only for Main Store Price
+    selling_price_map = get_price_map(price_list_names, selling=1, price_list="Main Store Price")
 
-	result = []
-	if item_results:
-		for item_dict in item_results:
-			data = {
-				"item_code": item_dict.item_code,
-				"item_name": item_dict.item_name,
-				"brand": item_dict.brand,
-				"warehouse": item_dict.warehouse,
-				"stock_available": item_dict.actual_qty or 0,
-				"buying_price_list": "",
-				"buying_rate": 0.0,
-				"selling_price_list": "",
-				"selling_rate": 0.0,
-			}
+    result = []
+    if item_results:
+        for item_dict in item_results:
+            data = {
+                "item_code": item_dict.item_code,
+                "item_name": item_dict.item_name,
+                "brand": item_dict.brand,
+                "warehouse": item_dict.warehouse,
+                "stock_available": item_dict.actual_qty or 0,
+                "selling_price_list": "",
+                "selling_rate": 0.0,
+            }
 
-			price_list = item_dict["price_list_name"]
-			if buying_price_map.get(price_list):
-				data["buying_price_list"] = buying_price_map.get(price_list)["Buying Price List"] or ""
-				data["buying_rate"] = buying_price_map.get(price_list)["Buying Rate"] or 0
-			if selling_price_map.get(price_list):
-				data["selling_price_list"] = selling_price_map.get(price_list)["Selling Price List"] or ""
-				data["selling_rate"] = selling_price_map.get(price_list)["Selling Rate"] or 0
+            price_list = item_dict["price_list_name"]
+            if selling_price_map.get(price_list):
+                data["selling_price_list"] = selling_price_map.get(price_list)["Selling Price List"] or ""
+                data["selling_rate"] = selling_price_map.get(price_list)["Selling Rate"] or 0
 
-			result.append(data)
+            result.append(data)
 
-	return result
+    return result
 
 
-def get_price_map(price_list_names, buying=0, selling=0):
+def get_price_map(price_list_names, selling=0, price_list="Main Store Price"):
     price_map = {}
 
     if not price_list_names:
         return price_map
 
-    rate_key = "Buying Rate" if buying else "Selling Rate"
-    price_list_key = "Buying Price List" if buying else "Selling Price List"
+    rate_key = "Selling Rate"
+    price_list_key = "Selling Price List"
 
-    # Add filter for Main Store Price when fetching selling prices
-    filters = {"name": ("in", price_list_names)}
-    if buying:
-        filters["buying"] = 1
-    elif selling:
-        filters["selling"] = 1
-        filters["price_list"] = "Main Store Price"  # Filter for Main Store Price
+    filters = {"name": ("in", price_list_names), "price_list": price_list}
+    filters["selling"] = 1
 
     pricing_details = frappe.get_all(
         "Item Price", fields=["name", "price_list", "price_list_rate"], filters=filters

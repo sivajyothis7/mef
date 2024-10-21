@@ -37,14 +37,14 @@ def get_columns():
 			"fieldtype": "Float",
 			"width": 120,
 		},
-		{
-			"label": _("Buying Price List"),
-			"fieldname": "buying_price_list",
-			"fieldtype": "Link",
-			"options": "Price List",
-			"width": 120,
-		},
-		{"label": _("Buying Rate"), "fieldname": "buying_rate", "fieldtype": "Currency", "width": 120},
+		# {
+		# 	"label": _("Buying Price List"),
+		# 	"fieldname": "buying_price_list",
+		# 	"fieldtype": "Link",
+		# 	"options": "Price List",
+		# 	"width": 120,
+		# },
+		# {"label": _("Buying Rate"), "fieldname": "buying_rate", "fieldtype": "Currency", "width": 120},
 		{
 			"label": _("Selling Price List"),
 			"fieldname": "selling_price_list",
@@ -119,26 +119,28 @@ def get_item_price_qty_data(filters):
 
 
 def get_price_map(price_list_names, buying=0, selling=0):
-	price_map = {}
+    price_map = {}
 
-	if not price_list_names:
-		return price_map
+    if not price_list_names:
+        return price_map
 
-	rate_key = "Buying Rate" if buying else "Selling Rate"
-	price_list_key = "Buying Price List" if buying else "Selling Price List"
+    rate_key = "Buying Rate" if buying else "Selling Rate"
+    price_list_key = "Buying Price List" if buying else "Selling Price List"
 
-	filters = {"name": ("in", price_list_names)}
-	if buying:
-		filters["buying"] = 1
-	else:
-		filters["selling"] = 1
+    # Add filter for Main Store Price when fetching selling prices
+    filters = {"name": ("in", price_list_names)}
+    if buying:
+        filters["buying"] = 1
+    elif selling:
+        filters["selling"] = 1
+        filters["price_list"] = "Main Store Price"  # Filter for Main Store Price
 
-	pricing_details = frappe.get_all(
-		"Item Price", fields=["name", "price_list", "price_list_rate"], filters=filters
-	)
+    pricing_details = frappe.get_all(
+        "Item Price", fields=["name", "price_list", "price_list_rate"], filters=filters
+    )
 
-	for d in pricing_details:
-		name = d["name"]
-		price_map[name] = {price_list_key: d["price_list"], rate_key: d["price_list_rate"]}
+    for d in pricing_details:
+        name = d["name"]
+        price_map[name] = {price_list_key: d["price_list"], rate_key: d["price_list_rate"]}
 
-	return price_map
+    return price_map

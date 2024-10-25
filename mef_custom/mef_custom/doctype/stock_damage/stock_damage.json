@@ -11,7 +11,8 @@
   "photos",
   "status",
   "column_break_ganx",
-  "damage_description"
+  "damage_description",
+  "current_warehouse"
  ],
  "fields": [
   {
@@ -46,11 +47,17 @@
    "fieldname": "damage_description",
    "fieldtype": "Small Text",
    "label": "Damage Description"
+  },
+  {
+   "fieldname": "current_warehouse",
+   "fieldtype": "Link",
+   "label": "Current Warehouse",
+   "options": "Warehouse"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-15 12:57:59.557988",
+ "modified": "2024-10-23 15:51:22.328340",
  "modified_by": "Administrator",
  "module": "Mef Custom",
  "name": "Stock Damage",

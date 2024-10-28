@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"FbEDIP6FVx\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">MEF</span>\",\"col\":12}},{\"id\":\"SGOq_NCX5J\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>General Access</b></span>\",\"col\":12}},{\"id\":\"0ZO_AHyqvE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":3}},{\"id\":\"LULxzt35xq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"-TnppsCeeO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"WNctuJ9dVX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Damage\",\"col\":3}},{\"id\":\"17uM4d1W7v\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"i-ljrsRmlU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Group\",\"col\":3}},{\"id\":\"_gGM4l2uSM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Entry\",\"col\":3}},{\"id\":\"-mdH5R_yBF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOM\",\"col\":3}},{\"id\":\"MC8jhuuoyr\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"cAduIJZBIo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order\",\"col\":3}},{\"id\":\"AWzRM8vnAy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":3}},{\"id\":\"Pkhubux6O4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"25njK01TD6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Reconciliation\",\"col\":3}},{\"id\":\"rovUb9djmE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":3}},{\"id\":\"HI8sbtL7U5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Note\",\"col\":3}},{\"id\":\"qEknCCmEmW\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Y2byUFAAXw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Reports</b><b></b></span>\",\"col\":12}},{\"id\":\"_BPJ2PjfUN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Ledger\",\"col\":3}},{\"id\":\"ndhAvxkdPF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Analytics\",\"col\":3}},{\"id\":\"pQKOVyo34i\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Balance\",\"col\":3}},{\"id\":\"la1Ke5ZHY7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Ageing\",\"col\":3}},{\"id\":\"4B9STMW8SH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse Wise Stock Balance\",\"col\":3}},{\"id\":\"0YVcdTthyl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order Analysis\",\"col\":3}},{\"id\":\"vaziAGtEue\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Damage Report\",\"col\":3}},{\"id\":\"U_gDDUQvTn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item-wise Sales History\",\"col\":3}},{\"id\":\"NKT7GUPUap\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order Trends\",\"col\":3}},{\"id\":\"W3OhKYpNP6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse wise Item Balance Age and Value\",\"col\":3}}]",
+ "content": "[{\"id\":\"FbEDIP6FVx\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">MEF</span>\",\"col\":12}},{\"id\":\"SGOq_NCX5J\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>General Access</b></span>\",\"col\":12}},{\"id\":\"0ZO_AHyqvE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":3}},{\"id\":\"LULxzt35xq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"-TnppsCeeO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"WNctuJ9dVX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Damage\",\"col\":3}},{\"id\":\"17uM4d1W7v\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"i-ljrsRmlU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Group\",\"col\":3}},{\"id\":\"_gGM4l2uSM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Entry\",\"col\":3}},{\"id\":\"-mdH5R_yBF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOM\",\"col\":3}},{\"id\":\"MC8jhuuoyr\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"cAduIJZBIo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order\",\"col\":3}},{\"id\":\"AWzRM8vnAy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":3}},{\"id\":\"Pkhubux6O4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":3}},{\"id\":\"25njK01TD6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Reconciliation\",\"col\":3}},{\"id\":\"rovUb9djmE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":3}},{\"id\":\"HI8sbtL7U5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Note\",\"col\":3}},{\"id\":\"qEknCCmEmW\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Y2byUFAAXw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Reports</b><b></b></span>\",\"col\":12}},{\"id\":\"_BPJ2PjfUN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Ledger\",\"col\":3}},{\"id\":\"ndhAvxkdPF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Analytics\",\"col\":3}},{\"id\":\"pQKOVyo34i\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Balance\",\"col\":3}},{\"id\":\"la1Ke5ZHY7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Ageing\",\"col\":3}},{\"id\":\"4B9STMW8SH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse Wise Stock Balance\",\"col\":3}},{\"id\":\"0YVcdTthyl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order Analysis\",\"col\":3}},{\"id\":\"vaziAGtEue\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Damage Report\",\"col\":3}},{\"id\":\"U_gDDUQvTn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item-wise Sales History\",\"col\":3}},{\"id\":\"b3fgLPonL-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Report\",\"col\":3}},{\"id\":\"NKiVr4BE5r\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Total Stock Summary\",\"col\":3}},{\"id\":\"NKT7GUPUap\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Order Trends\",\"col\":3}},{\"id\":\"e5qK3U7qBv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Order Report\",\"col\":3}},{\"id\":\"rYOaZYH9IJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Showroom Display Report\",\"col\":3}},{\"id\":\"W3OhKYpNP6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse wise Item Balance Age and Value\",\"col\":3}}]",
  "creation": "2024-06-13 09:50:26.463438",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "MEF",
  "links": [],
- "modified": "2024-10-25 16:23:43.880279",
+ "modified": "2024-10-28 12:42:54.142011",
  "modified_by": "Administrator",
  "module": "Mef Custom",
  "name": "MEF",
@@ -55,6 +55,27 @@
    "doc_view": "List",
    "label": "Warehouse wise Item Balance Age and Value",
    "link_to": "Warehouse wise Item Balance Age and Value",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Delivery Order Report",
+   "link_to": "Delayed Item Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Item Report",
+   "link_to": "Item Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Total Stock Summary",
+   "link_to": "Total Stock Summary",
    "type": "Report"
   },
   {
@@ -116,6 +137,13 @@
    "doc_view": "List",
    "label": "Sales Order Trends",
    "link_to": "Sales Order Trends",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Showroom Display Report",
+   "link_to": "Showroom Display Report",
    "type": "Report"
   },
   {

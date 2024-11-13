@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{Date}-{branch}-{##}",
+ "creation": "2024-11-13 15:24:24.746878",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date_tese",
+  "reporting_date",
+  "column_break_bhgn",
+  "branch",
+  "section_break_wfzk",
+  "display_item_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "date_tese",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_bhgn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_break_wfzk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "display_item_table",
+   "fieldtype": "Table",
+   "label": "Display Item Table",
+   "options": "Display Item Table"
+  },
+  {
+   "fieldname": "reporting_date",
+   "fieldtype": "Date",
+   "label": "Reporting Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-13 15:30:18.582656",
+ "modified_by": "Administrator",
+ "module": "Mef Custom",
+ "name": "Display Item Data",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
